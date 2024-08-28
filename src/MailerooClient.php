@@ -152,7 +152,17 @@ class MailerooClient {
         curl_setopt($ch, CURLOPT_POSTFIELDS, $post_fields);
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
+        $error = curl_error($ch);
         curl_close($ch);
+
+        if ($error) {
+
+            return [
+                'success' => false,
+                'message' => $error
+            ];
+
+        }
 
         return json_decode($response, true);
 
@@ -187,7 +197,17 @@ class MailerooClient {
 
         curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
         $response = curl_exec($ch);
+        $error = curl_error($ch);
         curl_close($ch);
+
+        if ($error) {
+
+            return [
+                'success' => false,
+                'message' => $error
+            ];
+
+        }
 
         if ($parse_json) {
             return json_decode($response, true);
@@ -223,7 +243,7 @@ class MailerooClient {
             return true;
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
@@ -239,7 +259,7 @@ class MailerooClient {
             return true;
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
@@ -261,13 +281,13 @@ class MailerooClient {
 
         $url = self::CONTACTS_API_ENDPOINT . "v1/contact/{$list_id}";
 
-        $response = $this->sendCustomRequest($url, 'PUT', $contact, true);
+        $response = $this->sendCustomRequest($url, 'PUT', $contact, true, true);
 
         if ($response['success'] === true) {
             return true;
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
@@ -275,13 +295,13 @@ class MailerooClient {
 
         $url = self::CONTACTS_API_ENDPOINT . "v1/contact/{$list_id}/{$email_address}";
 
-        $response = $this->sendCustomRequest($url, 'PATCH', $contact, true);
+        $response = $this->sendCustomRequest($url, 'PATCH', $contact, true, true);
 
         if ($response['success'] === true) {
             return true;
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
@@ -289,13 +309,13 @@ class MailerooClient {
 
         $url = self::CONTACTS_API_ENDPOINT . "v1/contact/{$list_id}/{$email_address}";
 
-        $response = $this->sendCustomRequest($url, 'DELETE', [], true);
+        $response = $this->sendCustomRequest($url, 'DELETE', [], true, true);
 
         if ($response['success'] === true) {
             return true;
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
@@ -303,13 +323,13 @@ class MailerooClient {
 
         $url = self::CONTACTS_API_ENDPOINT . "v1/contact/{$list_id}/{$email_address}";
 
-        $response = $this->sendCustomRequest($url, 'GET', [], false);
+        $response = $this->sendCustomRequest($url, 'GET', [], false, true);
 
         if ($response['success'] === true) {
             return $response['contact'];
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
@@ -317,13 +337,13 @@ class MailerooClient {
 
         $url = self::CONTACTS_API_ENDPOINT . "v1/contacts/{$list_id}?query={$query}&page={$page}";
 
-        $response = $this->sendCustomRequest($url, 'GET', [], false);
+        $response = $this->sendCustomRequest($url, 'GET', [], false, true);
 
         if ($response['success'] === true) {
             return $response['data'];
         }
 
-        return new Exception($response['message']);
+        throw new Exception($response['message']);
 
     }
 
