@@ -217,6 +217,10 @@ try {
 }
 ```
 
+## Further Reading
+
+For more information on how to use the Maileroo API, please refer to the [Maileroo API Documentation](https://maileroo.com/api-documentation).
+
 ## License
 
 This software is released under the MIT License. See the [LICENSE](LICENSE) file for more information.
