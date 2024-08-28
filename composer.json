@@ -1,0 +1,18 @@
+{
+  "name": "maileroo/maileroo-php-sdk",
+  "description": "With this library, you can seamlessly integrate Maileroo's powerful email API into your PHP projects with ease.",
+  "type": "library",
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Maileroo\\MailerooPhpSdk\\": "src/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Areeb Majeed"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {}
+}
