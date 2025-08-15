@@ -473,7 +473,5 @@ composer.lock
 *.sass.map
 *.scss.map
 
-
-#### Test File
-
-MailerooClientExample.php
+# JetBrains IDEs (IntelliJ IDEA, PyCharm, WebStorm, etc.)
+.idea/
