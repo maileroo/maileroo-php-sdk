@@ -277,6 +277,84 @@ foreach ($response['results'] as $email) {
 }
 ```
 
+### 7. Scheduling Emails
+
+You can schedule emails for future delivery by adding a `scheduled_at` field with an RFC 3339 formatted datetime string.
+
+```php
+<?php
+
+use Maileroo\MailerooClient;
+use Maileroo\EmailAddress;
+
+$client = new MailerooClient('your-api-key');
+
+// Schedule email for delivery tomorrow at 9:00 AM UTC
+
+$scheduled_time = date('c', strtotime('+1 day 9:00')); // RFC 3339 format
+
+$reference_id = $client->sendBasicEmail([
+    'from' => new EmailAddress('scheduler@example.com', 'Scheduler'),
+    'to' => new EmailAddress('recipient@example.com', 'Recipient'),
+    'subject' => 'Scheduled Email - Daily Report',
+    'html' => '<h1>Daily Report</h1><p>This email was scheduled for delivery.</p>',
+    'plain' => 'Daily Report - This email was scheduled for delivery.',
+    'scheduled_at' => $scheduled_time // Schedule for future delivery
+]);
+
+echo "Email scheduled with reference ID: " . $reference_id;
+```
+
+### 8. Managing Scheduled Emails
+
+```php
+<?php
+
+use Maileroo\MailerooClient;
+
+$client = new MailerooClient('your-api-key');
+
+$response = $client->getScheduledEmails($page = 1, $per_page = 20);
+
+// Access pagination info
+
+echo "Page: " . $response['page'] . "/" . $response['total_pages'] . "\n";
+echo "Total emails: " . $response['total_count'] . "\n";
+
+// Loop through the results
+
+foreach ($response['results'] as $email) {
+
+    echo "Email ID: " . $email['reference_id'] . "\n";
+    echo "From: " . $email['from'] . "\n";
+    echo "Subject: " . $email['subject'] . "\n";
+    echo "Scheduled for: " . $email['scheduled_at'] . "\n";
+    echo "Recipients: " . implode(', ', $email['recipients']) . "\n";
+    
+    // Show tags if present
+    
+    if (!empty($email['tags'])) {
+        echo "Tags: " . json_encode($email['tags']) . "\n";
+    }
+    
+    // Show custom headers if present
+    
+    if (!empty($email['headers'])) {
+        echo "Headers: " . json_encode($email['headers']) . "\n";
+    }
+    
+    // Cancel a scheduled email if needed
+    
+    if ($email['reference_id'] === 'some-reference-id') {
+        $client->deleteScheduledEmail($email['reference_id']);
+        echo "Email cancelled\n";
+    }
+    
+    echo "---\n";
+    
+}
+```
+
 ## API Reference
 
 ### MailerooClient
