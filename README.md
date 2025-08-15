@@ -34,6 +34,8 @@ composer require maileroo/maileroo-php-sdk
 ```php
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Maileroo\MailerooClient;
 use Maileroo\EmailAddress;
 use Maileroo\Attachment;
@@ -61,6 +63,8 @@ echo "Email sent with reference ID: " . $reference_id;
 
 ```php
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 use Maileroo\MailerooClient;
 use Maileroo\EmailAddress;
@@ -95,6 +99,8 @@ $reference_id = $client->sendBasicEmail([
 ```php
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Maileroo\MailerooClient;
 use Maileroo\EmailAddress;
 
@@ -118,6 +124,8 @@ $reference_id = $client->sendTemplatedEmail([
 
 ```php
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 use Maileroo\MailerooClient;
 use Maileroo\EmailAddress;
@@ -154,6 +162,8 @@ $result = $client->sendBulkEmails([
 
 ```php
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 use Maileroo\MailerooClient;
 use Maileroo\EmailAddress;
@@ -197,6 +207,8 @@ $result = $client->sendBulkEmails([
 ```php
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Maileroo\Attachment;
 
 // From file path:
@@ -234,6 +246,8 @@ You can schedule emails for future delivery by adding a `scheduled_at` field wit
 ```php
 <?php
 
+require_once __DIR__ . '/vendor/autoload.php';
+
 use Maileroo\MailerooClient;
 use Maileroo\EmailAddress;
 
@@ -259,6 +273,8 @@ echo "Email scheduled with reference ID: " . $reference_id;
 
 ```php
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 use Maileroo\MailerooClient;
 
@@ -309,6 +325,8 @@ foreach ($response['results'] as $email) {
 
 ```php
 <?php
+
+require_once __DIR__ . '/vendor/autoload.php';
 
 use Maileroo\MailerooClient;
 
