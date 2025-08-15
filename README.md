@@ -76,7 +76,7 @@ $reference_id = $client->sendBasicEmail([
     'from' => new EmailAddress('sender@example.com', 'Your Company'),
     'to' => [
         new EmailAddress('john@example.com', 'John Doe'),
-        new EmailAddress('jane@example.com', 'Jane Smith')
+        new EmailAddress('jane@example.com')
     ],
     'cc' => [new EmailAddress('manager@example.com', 'Manager')],
     'bcc' => [new EmailAddress('archive@example.com')],
