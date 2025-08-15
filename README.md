@@ -227,57 +227,7 @@ $attachment4 = Attachment::fromStream('file.txt', $stream, 'text/plain', false);
 $inline_image = Attachment::fromFile('/path/to/logo.png', 'image/png', true);
 ```
 
-### 6. Managing Scheduled Emails
-
-```php
-<?php
-
-use Maileroo\MailerooClient;
-
-$client = new MailerooClient('your-api-key');
-
-$response = $client->getScheduledEmails($page = 1, $per_page = 20);
-
-// Access pagination info
-
-echo "Page: " . $response['page'] . "/" . $response['total_pages'] . "\n";
-echo "Total emails: " . $response['total_count'] . "\n";
-
-// Loop through the results
-
-foreach ($response['results'] as $email) {
-
-    echo "Email ID: " . $email['reference_id'] . "\n";
-    echo "From: " . $email['from'] . "\n";
-    echo "Subject: " . $email['subject'] . "\n";
-    echo "Scheduled for: " . $email['scheduled_at'] . "\n";
-    echo "Recipients: " . implode(', ', $email['recipients']) . "\n";
-    
-    // Show tags if present
-    
-    if (!empty($email['tags'])) {
-        echo "Tags: " . json_encode($email['tags']) . "\n";
-    }
-    
-    // Show custom headers if present
-    
-    if (!empty($email['headers'])) {
-        echo "Headers: " . json_encode($email['headers']) . "\n";
-    }
-    
-    // Cancel a scheduled email if needed
-    
-    if ($email['reference_id'] === 'some-reference-id') {
-        $client->deleteScheduledEmail($email['reference_id']);
-        echo "Email cancelled\n";
-    }
-    
-    echo "---\n";
-    
-}
-```
-
-### 7. Scheduling Emails
+### 6. Scheduling Emails
 
 You can schedule emails for future delivery by adding a `scheduled_at` field with an RFC 3339 formatted datetime string.
 
@@ -305,7 +255,7 @@ $reference_id = $client->sendBasicEmail([
 echo "Email scheduled with reference ID: " . $reference_id;
 ```
 
-### 8. Managing Scheduled Emails
+### 7. Managing Scheduled Emails
 
 ```php
 <?php
@@ -353,6 +303,24 @@ foreach ($response['results'] as $email) {
     echo "---\n";
     
 }
+```
+
+### 8. Deleting Scheduled Email
+
+```php
+<?php
+
+use Maileroo\MailerooClient;
+
+$client = new MailerooClient('your-api-key');
+
+try {
+    $client->deleteScheduledEmail('your-reference-id');
+    echo "Scheduled email cancelled successfully.";
+} catch (\Exception $e) {
+    echo "Error cancelling scheduled email: " . $e->getMessage();
+}
+
 ```
 
 ## API Reference
