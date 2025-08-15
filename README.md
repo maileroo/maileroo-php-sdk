@@ -156,6 +156,10 @@ $result = $client->sendBulkEmails([
         // ... up to 500 messages
     ]
 ]);
+
+foreach ($result as $reference_id) {
+    echo "Email sent with reference ID: " . $reference_id . "\n";
+}
 ```
 
 ### 4. Bulk Email Sending (With Template ID)
@@ -200,6 +204,10 @@ $result = $client->sendBulkEmails([
         Attachment::fromFile('/path/to/welcome-guide.pdf', 'application/pdf')
     ]
 ]);
+
+foreach ($result as $reference_id) {
+    echo "Email sent with reference ID: " . $reference_id . "\n";
+}
 ```
 
 ### 5. Working with Attachments
