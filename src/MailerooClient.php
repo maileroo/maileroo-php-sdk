@@ -464,7 +464,7 @@ class MailerooClient {
 
         $reference_id = $this->validateReferenceId($reference_id);
 
-        $response = $this->sendRequest('DELETE', 'scheduled/' . $reference_id);
+        $response = $this->sendRequest('DELETE', 'emails/scheduled/' . $reference_id);
 
         if (is_array($response) && isset($response['success']) && $response['success']) {
             return true;
@@ -488,7 +488,7 @@ class MailerooClient {
             throw new \InvalidArgumentException('per_page cannot be greater than 100.');
         }
 
-        $response = $this->sendRequest('GET', 'scheduled', [
+        $response = $this->sendRequest('GET', 'emails/scheduled', [
             'page' => $page,
             'per_page' => $per_page,
         ]);
