@@ -306,7 +306,7 @@ class MailerooClient {
         $response = $this->sendRequest('POST', 'emails/bulk', $payload);
 
         if (is_array($response) && isset($response['success']) && $response['success'] && isset($response['data'])) {
-            return $response['data'];
+            return $response['data']['reference_ids'];
         }
 
         throw new \RuntimeException('The API returned an error: ' . $response['message']);
