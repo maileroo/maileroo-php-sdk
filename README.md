@@ -90,6 +90,10 @@ $reference_id = $client->sendBasicEmail([
     ],
     'tracking' => true,
     'tags' => ['campaign' => 'monthly-report', 'type' => 'business'],
+    'headers' => [
+        'X-Custom-Header' => 'Custom Value',
+        'X-Another-Header' => 'Another Value'
+    ],
     'reference_id' => $client->getReferenceId()
 ]);
 ```
